@@ -1,0 +1,59 @@
+.testClass {
+  font-family: "Inter";
+  width: 5px;
+  height: 5px;
+  position: relative;
+  border: 1px solid silver;
+  // border-bottom: 0;
+  // border-right: 0;
+  padding: 8px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    cursor: pointer;
+    // background: red;
+    top: -4px;
+    left: -4px;
+    border-radius: 50%;
+  }
+
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   background: red;
+  //   width: 33px;
+  //   height: 2px;
+  //   top: 8px;
+  //   left: -7px;
+  //   transform: rotate(45deg);
+  // }
+
+  &:hover::before {
+    background: blue;
+  }
+}
+
+.reset {
+  border: 1px solid transparent;
+}
+
+.playerType {
+  &::before {
+    background: blue !important;
+  }
+}
+
+.opponentType {
+  &::before {
+    background: red !important;
+  }
+}
+
+.emptyType {
+  &::before {
+    // background: blueviolet !important;
+  }
+}
