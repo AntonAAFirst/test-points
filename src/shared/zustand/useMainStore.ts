@@ -1,11 +1,13 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { IPoint } from "../types";
+import { IPoint, PointType } from "../types";
 import { defaultMatrix } from "@/pages/data";
 
 interface MainStoreState {
   matrix: IPoint[][];
   setMatrix: (newMatrix: IPoint[][]) => void;
+  resetMatrix: () => void;
+  makePlayerMove: (X: number, Y: number) => void;
 }
 
 export const useMainStore = create<MainStoreState>()(
@@ -15,6 +17,16 @@ export const useMainStore = create<MainStoreState>()(
     setMatrix: (matrix: IPoint[][]) =>
       set((state: MainStoreState) => {
         state.matrix = matrix;
+      }),
+
+    resetMatrix: () =>
+      set((state: MainStoreState) => {
+        state.matrix = defaultMatrix;
+      }),
+
+    makePlayerMove: (X: number, Y: number) =>
+      set((state: MainStoreState) => {
+        state.matrix[Y][X].type = PointType.player;
       }),
   }))
 );

@@ -2,7 +2,7 @@ import axios from "axios";
 import cls from "./item.module.scss";
 import cn from "classnames";
 import { makeMove, resetGame } from "@/shared/http";
-import { IPoint, PointType } from "@/shared/types";
+import { IPoint, PointStatus, PointType } from "@/shared/types";
 import { useMainStore } from "@/shared/zustand/useMainStore";
 
 interface ItemProps {
@@ -12,13 +12,21 @@ interface ItemProps {
 }
 
 export const Item = ({ index, coordinate, point }: ItemProps) => {
-  const { setMatrix } = useMainStore();
+  const { setMatrix, makePlayerMove, matrix } = useMainStore();
 
   const request = async () => {
-    const answer = (await makeMove(coordinate.x, coordinate.y))
-      .matrixAfterOpponentMoved;
+    if (point.type === PointType.empty) {
+      makePlayerMove(coordinate.x, coordinate.y);
 
-    setMatrix(answer);
+      const answer = (await makeMove(coordinate.x, coordinate.y))
+        .matrixAfterOpponentMoved;
+
+      console.log("answr is - ", answer);
+
+      setMatrix(answer);
+    } else {
+      alert("Поле занято");
+    }
   };
 
   return (

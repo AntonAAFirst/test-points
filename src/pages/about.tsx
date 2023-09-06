@@ -5,6 +5,7 @@ import axios from "axios";
 import { resetGame } from "@/shared/http";
 import { defaultMatrix } from "./data";
 import { useMainStore } from "@/shared/zustand/useMainStore";
+import { useEffect, useCallback } from "react";
 
 interface MyType {
   id: number;
@@ -20,25 +21,19 @@ const About = () => {
   //   Array.from({ length: 20 }, (_, colIndex) => rowIndex * 20 + colIndex + 1)
   // );
 
-  const { matrix } = useMainStore();
+  const { matrix, resetMatrix } = useMainStore();
+
+  const initial = useCallback(async () => {
+    await resetGame();
+    resetMatrix();
+  }, []);
+
+  useEffect(() => {
+    initial();
+  }, [initial]);
 
   return (
     <>
-      <div
-        onClick={async () => console.log(await resetGame())}
-        style={{
-          border: "2px solid yellow",
-          width: "200px",
-          height: "80px",
-          fontFamily: "Inter",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
-        }}
-      >
-        click here
-      </div>
       <div
         style={{
           display: "flex",
@@ -62,7 +57,7 @@ const About = () => {
             {matrixItem.map((item, secondIndex) => (
               <Item
                 point={item}
-                coordinate={{ x: firstIndex, y: secondIndex }}
+                coordinate={{ x: secondIndex, y: firstIndex }}
                 index={firstIndex === 19 || secondIndex === 19}
                 key={secondIndex}
                 // key={item}
