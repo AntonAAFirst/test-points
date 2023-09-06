@@ -3,7 +3,7 @@ import { Item } from "@/components/Item/Item";
 import cls from "./about.module.scss";
 import axios from "axios";
 import { resetGame } from "@/shared/http";
-import { defaultMatrix } from "./data";
+import { defaultMatrix } from "../shared/consts.ts/data";
 import { useMainStore } from "@/shared/zustand/useMainStore";
 import { useEffect, useCallback } from "react";
 

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { IPoint, PointType } from "../types";
-import { defaultMatrix } from "@/pages/data";
+import { defaultMatrix } from "@/shared/consts.ts/data";
 
 interface MainStoreState {
   matrix: IPoint[][];
