@@ -57,3 +57,9 @@
     // background: blueviolet !important;
   }
 }
+
+.blockedType {
+  &::before {
+    background: silver !important;
+  }
+}

@@ -12,7 +12,8 @@ interface ItemProps {
 }
 
 export const Item = ({ index, coordinate, point }: ItemProps) => {
-  const { setMatrix, makePlayerMove, matrix, setIsBlock } = useMainStore();
+  const { setMatrix, makePlayerMove, matrix, setIsBlock, isBlocked } =
+    useMainStore();
 
   const request = async () => {
     if (point.type === PointType.empty) {
@@ -37,6 +38,7 @@ export const Item = ({ index, coordinate, point }: ItemProps) => {
         [cls.playerType]: point.type === PointType.player,
         [cls.opponentType]: point.type === PointType.opponent,
         [cls.emptyType]: point.type === PointType.empty,
+        [cls.blockedType]: isBlocked,
       })}
     ></div>
   );
