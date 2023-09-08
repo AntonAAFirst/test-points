@@ -8,11 +8,18 @@ interface MainStoreState {
   setMatrix: (newMatrix: IPoint[][]) => void;
   resetMatrix: () => void;
   makePlayerMove: (X: number, Y: number) => void;
+  isBlocked: boolean;
+  setIsBlock: (condition: boolean) => void;
 }
 
 export const useMainStore = create<MainStoreState>()(
   immer((set) => ({
     matrix: defaultMatrix,
+    isBlocked: false,
+    setIsBlock: (condition: boolean) =>
+      set((state: MainStoreState) => {
+        state.isBlocked = condition;
+      }),
 
     setMatrix: (matrix: IPoint[][]) =>
       set((state: MainStoreState) => {

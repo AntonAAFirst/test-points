@@ -3,7 +3,7 @@ import { MoveResposneType } from "../types";
 
 export const makeMove = async (X: number, Y: number) => {
   const { data } = await axios.post<MoveResposneType>(
-    "http://m130.ru:8011/game/move",
+    "https://m130.ru:8011/game/move",
     {
       position: { x: X, y: Y },
     }
@@ -13,7 +13,7 @@ export const makeMove = async (X: number, Y: number) => {
 };
 
 export const resetGame = async () => {
-  const { data } = await axios.post("http://m130.ru:8011/game/reset");
+  const { data } = await axios.post("https://m130.ru:8011/game/reset");
 
   return data;
 };

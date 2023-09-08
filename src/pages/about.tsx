@@ -21,12 +21,12 @@ const About = () => {
   //   Array.from({ length: 20 }, (_, colIndex) => rowIndex * 20 + colIndex + 1)
   // );
 
-  const { matrix, resetMatrix } = useMainStore();
+  const { matrix, resetMatrix, isBlocked } = useMainStore();
 
   const initial = useCallback(async () => {
     await resetGame();
     resetMatrix();
-  }, []);
+  }, [resetMatrix]);
 
   useEffect(() => {
     initial();
@@ -45,6 +45,7 @@ const About = () => {
         }}
         // className={cls.field}
       >
+        <div>{isBlocked.toString()}</div>
         {matrix.map((matrixItem, firstIndex) => (
           <div
             style={{

@@ -12,18 +12,18 @@ interface ItemProps {
 }
 
 export const Item = ({ index, coordinate, point }: ItemProps) => {
-  const { setMatrix, makePlayerMove, matrix } = useMainStore();
+  const { setMatrix, makePlayerMove, matrix, setIsBlock } = useMainStore();
 
   const request = async () => {
     if (point.type === PointType.empty) {
       makePlayerMove(coordinate.x, coordinate.y);
 
+      setIsBlock(true);
       const answer = (await makeMove(coordinate.x, coordinate.y))
         .matrixAfterOpponentMoved;
 
-      console.log("answr is - ", answer);
-
       setMatrix(answer);
+      setIsBlock(false);
     } else {
       alert("Поле занято");
     }
