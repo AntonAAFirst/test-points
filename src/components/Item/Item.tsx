@@ -16,7 +16,7 @@ export const Item = ({ index, coordinate, point }: ItemProps) => {
     useMainStore();
 
   const request = async () => {
-    if (point.type === PointType.empty) {
+    if (point.type === PointType.empty && !isBlocked) {
       makePlayerMove(coordinate.x, coordinate.y);
 
       setIsBlock(true);
@@ -25,7 +25,7 @@ export const Item = ({ index, coordinate, point }: ItemProps) => {
 
       setMatrix(answer);
       setIsBlock(false);
-    } else {
+    } else if (!isBlocked) {
       alert("Поле занято");
     }
   };
@@ -38,7 +38,7 @@ export const Item = ({ index, coordinate, point }: ItemProps) => {
         [cls.playerType]: point.type === PointType.player,
         [cls.opponentType]: point.type === PointType.opponent,
         [cls.emptyType]: point.type === PointType.empty,
-        [cls.blockedType]: isBlocked,
+        [cls.blockedType]: isBlocked && point.type !== PointType.empty,
       })}
     ></div>
   );
