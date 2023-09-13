@@ -60,7 +60,7 @@ const About = () => {
                 point={item}
                 coordinate={{ x: secondIndex, y: firstIndex }}
                 index={firstIndex === 19 || secondIndex === 19}
-                key={secondIndex}
+                key={firstIndex * matrix.length + secondIndex}
                 // key={item}
               />
             ))}

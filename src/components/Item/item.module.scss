@@ -49,6 +49,7 @@
 .opponentType {
   &::before {
     background: red !important;
+    z-index: 142;
   }
 }
 
@@ -62,4 +63,31 @@
   &::before {
     background: silver !important;
   }
+}
+
+.capturingBottomRight {
+  transform: rotate(45deg);
+  position: absolute;
+  width: 33px;
+  height: 1px;
+  left: -8px;
+  background: blue;
+}
+
+.capturingBottomLeft {
+  transform: rotate(-45deg);
+  position: absolute;
+  width: 33px;
+  height: 1px;
+  left: -26px;
+  background: blue;
+}
+
+.capturingTopLeft {
+  // transform: rotate(-135deg);
+  // position: absolute;
+  // width: 33px;
+  // height: 1px;
+  // top: -10px;
+  // background: orange;
 }

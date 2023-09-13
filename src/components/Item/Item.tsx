@@ -15,6 +15,8 @@ export const Item = ({ index, coordinate, point }: ItemProps) => {
   const { setMatrix, makePlayerMove, matrix, setIsBlock, isBlocked } =
     useMainStore();
 
+  console.log("updated", JSON.stringify(coordinate));
+
   const request = async () => {
     if (point.type === PointType.empty && !isBlocked) {
       makePlayerMove(coordinate.x, coordinate.y);
@@ -22,6 +24,8 @@ export const Item = ({ index, coordinate, point }: ItemProps) => {
       setIsBlock(true);
       const answer = (await makeMove(coordinate.x, coordinate.y))
         .matrixAfterOpponentMoved;
+
+      console.log("that's matrix - ", matrix);
 
       setMatrix(answer);
       setIsBlock(false);
@@ -40,6 +44,26 @@ export const Item = ({ index, coordinate, point }: ItemProps) => {
         [cls.emptyType]: point.type === PointType.empty,
         [cls.blockedType]: isBlocked && point.type !== PointType.empty,
       })}
-    ></div>
+    >
+      <div
+        className={cn(cls.f, {
+          [cls.capturingBottomRight]:
+            matrix[coordinate.y][coordinate.x].status ===
+              PointStatus.capturing &&
+            matrix[coordinate.y + 1][coordinate.x + 1].status ===
+              PointStatus.capturing,
+        })}
+      ></div>
+
+      <div
+        className={cn(cls.f, {
+          [cls.capturingBottomLeft]:
+            matrix[coordinate.y][coordinate.x].status ===
+              PointStatus.capturing &&
+            matrix[coordinate.y + 1][coordinate.x - 1].status ===
+              PointStatus.capturing,
+        })}
+      ></div>
+    </div>
   );
 };
